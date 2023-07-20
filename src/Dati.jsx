@@ -2,7 +2,7 @@ const Dati = [
     {id: 0, title:'Blade Runner 2049', year: 2017, mainActor: 'Ryan Gosling', cult: true, success: false, category: 'sci-fi'},
     {id: 1, title:'Dune', year: 2021, mainActor: 'Timothy Chalamet', cult: true, success: true, category: 'sci-fi'},
     {id: 2, title:'The Batman', year: 2022, mainActor: 'Robert Pattinson', cult: false, success: true, category: 'heroes'},
-    {id: 3, title:'The Menu', year: 2022, mainActor: 'Anya Taylor Joy', cult: false, success: false, category: 'thriller'},
+    {id: 3, title:'The Menu', year: 2022, mainActor: 'Anya Taylor-Joy', cult: false, success: false, category: 'thriller'},
     {id: 4, title:'Avengers: Endgame', year: 2019, mainActor: 'Robert Downey Jr.', cult: true, success: true, category: 'heroes'},
     {id: 5, title:'Blade Runner', year: 1982, mainActor: 'Harrison Ford', cult: true, success: true, category: 'sci-fi'},
     { id: 6, title: 'Inception', year: 2010, mainActor: 'Leonardo DiCaprio', cult: true, success: true , category: 'thriller'},

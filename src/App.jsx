@@ -29,7 +29,7 @@ function App() {
   function filterText(event){
     const textInserted = event.target.value;
     const resultMovies = movies.filter((item) => 
-      item.title.toLowerCase().includes(textInserted.toLowerCase())
+      item.title.toLowerCase().startsWith(textInserted.toLowerCase())
     );
     setFilteredMovies(resultMovies);
   };

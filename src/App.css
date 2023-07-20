@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lunasima&display=swap');
+
 *{
   margin: 0;
   padding: 0;
@@ -8,6 +10,7 @@
 
 body{
   background-color: aqua;
+  font-family: 'Lunasima', sans-serif;
 }
 
 .header{
@@ -57,4 +60,16 @@ body{
   justify-content: start;
   align-items: center;
   gap: 5vh;
+}
+
+.input-movie{
+  border-radius: 1vh;
+  padding: 1.5vh 2.5vh;
+  width: 45vh;
+  border: 1px solid gray;
+}
+
+.input-movie:focus{
+  border: 1px solid gray;
+  outline: none;
 }

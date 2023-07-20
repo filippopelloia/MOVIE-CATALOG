@@ -91,6 +91,7 @@ function App() {
                   actor={item.actor}
                   cult={item.cult}
                   success={item.success}
+                  mainActor={item.mainActor}
               />
            </div>
   })
@@ -109,7 +110,9 @@ console.log(filteredMovies);
       <div className='app'>
 
         <div className='header'>
+          <h1>Movie List</h1>
             <input type="text" 
+                   className='input-movie'
                    placeholder='Search for a movie...' 
                    onChange={(event) => filterText(event)}
             />
@@ -123,7 +126,7 @@ console.log(filteredMovies);
             aria-controls="panel1a-content"
             id="panel1a-header"
           >
-            <Typography>Category</Typography>
+            <Typography>Categories</Typography>
           </AccordionSummary>
           <AccordionDetails>  
 
@@ -163,7 +166,7 @@ console.log(filteredMovies);
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
-            <Typography>Cult</Typography>
+            <Typography>Cult Movies</Typography>
           </AccordionSummary>
           <AccordionDetails>
 
@@ -188,7 +191,7 @@ console.log(filteredMovies);
             aria-controls="panel2a-content"
             id="panel2a-header"
           >
-            <Typography>Success</Typography>
+            <Typography>Successful Movies</Typography>
           </AccordionSummary>
           <AccordionDetails>
 

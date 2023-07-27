@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import './App.css'
-import Dati from './Dati.jsx';
+import Dati from './Dati.json';
 // import Header from './Header.jsx';
 import Checkbox from '@mui/material/Checkbox';
 import Accordion from '@mui/material/Accordion';
@@ -8,21 +8,37 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Card from './Card.jsx';
+// import Card from './Card.jsx';
+
+import MovieList from './MovieList.jsx';
+import FilterCheckbox from './FilterCheckbox.jsx';
 
 
 function App() {
   const[movies, setMovies] = useState();
   const[filteredMovies, setFilteredMovies] = useState([]);
+  const[checkCounter, setCheckCounter] = useState(0);
 
 
-  useEffect(() => {
-    setMovies(Dati);
-  }, [])
+  const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedCult, setSelectedCult] = useState([]);
 
-  useEffect(() => {
-    setFilteredMovies(movies);
-  }, [movies])
+  function handleCategoryChange(category){
+    if (selectedCategories.includes(category)) {
+      setSelectedCategories(selectedCategories.filter((cat) => cat !== category));
+    } else {
+      setSelectedCategories([...selectedCategories, category]);
+    }
+  };
+
+  function handleCultChange(cult){
+    if (selectedCult.includes(cult)) {
+      setSelectedCategories(selectedCult.filter((cat) => cat !== cult));
+    } else {
+      setSelectedCategories([...selectedCult, cult]);
+    }
+  };
+
 
 
   //INPUT - FUNZIONE CHE FILTRA DATI
@@ -34,20 +50,6 @@ function App() {
     setFilteredMovies(resultMovies);
   };
 
-
-  //CATEGORIES - FUNZIONE CHE FILTRA DATI
-  function handleChange(event){
-    const {value, checked} = event.target;
-
-    if (checked) {
-      const resultCategories = movies.filter((item) => 
-        item.category.includes(value)
-      );
-      setFilteredMovies(resultCategories);
-    } else {
-      setFilteredMovies(movies);
-    }
-  };
 
 
   //SUCCESS - FUNZIONE CHE FILTRA DATI
@@ -82,26 +84,11 @@ function App() {
   };
 
 
-  //MOSTRA DATI FILTRATI
-  const showMovies = filteredMovies?.map(item => {
-    return <div className='card'>
-              <Card key={item.id}
-                  title={item.title}
-                  year={item.year}
-                  actor={item.actor}
-                  cult={item.cult}
-                  success={item.success}
-                  mainActor={item.mainActor}
-              />
-           </div>
-  })
-
 
 
   const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 
-console.log(filteredMovies);
 
 
 
@@ -131,30 +118,37 @@ console.log(filteredMovies);
           <AccordionDetails>  
 
             <div className='check-container'>
-              <div>
-                <h3>Sci-fi</h3>
-                <Checkbox {...label} value="sci-fi" onChange={(event) => handleChange(event)} />
-              </div>
 
-              <div>
-                <h3>Thriller</h3>
-                <Checkbox {...label} value="thriller" onChange={(event) => handleChange(event)} />
-              </div>
+
+                <FilterCheckbox
+                  label="sci-fi"
+                  checked={selectedCategories.includes('sci-fi')}
+                  onChange={() => handleCategoryChange('sci-fi')}
+                />
+                <FilterCheckbox
+                  label="thriller"
+                  checked={selectedCategories.includes('thriller')}
+                  onChange={() => handleCategoryChange('thriller')}
+                />
+                <FilterCheckbox
+                  label="comedy"
+                  checked={selectedCategories.includes('comedy')}
+                  onChange={() => handleCategoryChange('comedy')}
+                />
+
+                <FilterCheckbox
+                  label="romance"
+                  checked={selectedCategories.includes('romance')}
+                  onChange={() => handleCategoryChange('romance')}
+                />
+                                
+                <FilterCheckbox
+                  label="heroes"
+                  checked={selectedCategories.includes('heroes')}
+                  onChange={() => handleCategoryChange('heroes')}
+                />
+
               
-              <div>
-                <h3>Heroes</h3>
-                <Checkbox {...label} value="heroes" onChange={(event) => handleChange(event)} />
-              </div>
-
-              <div>
-                <h3>Comedy</h3>
-                <Checkbox {...label} value="comedy" onChange={(event) => handleChange(event)} />
-              </div>
-
-              <div>
-                <h3>Romance</h3>
-                <Checkbox {...label} value="romance" onChange={(event) => handleChange(event)} />
-              </div>
             </div>
 
           </AccordionDetails>
@@ -171,15 +165,28 @@ console.log(filteredMovies);
           <AccordionDetails>
 
             <div className='check-container-mini'>
-              <div>
-                <h3>Yes</h3>
-                <Checkbox {...label} onChange={(event) => isCult(event)} value="true" />
-              </div>
+              {/* <div> */}
+                {/* <h3>Yes</h3> */}
+                {/* <Checkbox {...label} onChange={(event) => isCult(event)} value="true" /> */}
 
-              <div>
+                <FilterCheckbox
+                  label="yes"
+                  checked={selectedCult.includes(true)}
+                  onChange={() => handleCultChange(true)}
+                />
+
+              {/* </div> */}
+
+              <FilterCheckbox
+                  label="no"
+                  checked={selectedCult.includes(false)}
+                  onChange={() => handleCultChange(false)}
+                />
+
+              {/* <div>
                 <h3>No</h3>
                 <Checkbox {...label} onChange={(event) => isCult(event)} value="false" />
-              </div>
+              </div> */}
             </div>
 
           </AccordionDetails>
@@ -212,7 +219,8 @@ console.log(filteredMovies);
       </div>
 
         <div className='card-container'>
-          {showMovies}
+          {/* {showMovies} */}
+          <MovieList data={Dati} selectedCategories={selectedCategories} selectedCult={selectedCult} />
         </div>
       </div>
     </>

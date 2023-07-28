@@ -8,12 +8,12 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
+
 import MovieList from './MovieList.jsx';
 import FilterCheckbox from './FilterCheckbox.jsx';
 
 
 function App() {
-  const[movies, setMovies] = useState();
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedCult, setSelectedCult] = useState([]);
   const [selectedSuccess, setSelectedSuccess] = useState([]);
@@ -56,6 +56,10 @@ function App() {
     setFilteredMovies(resultMovies);
   };
 
+
+
+
+  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 
   return (

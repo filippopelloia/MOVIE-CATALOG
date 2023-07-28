@@ -8,8 +8,8 @@ export default function Card(props) {
         <h6>Main actor: {props.mainActor}</h6>
 
         <div>
-            <h5>{props.cult}</h5>
-            <h5>{props.success}</h5>
+            <h5>Cult: {props.cult}</h5>
+            <h5>Success: {props.success}</h5>
         </div>
     </div>
   )

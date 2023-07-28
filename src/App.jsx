@@ -1,14 +1,12 @@
 import { useState } from 'react'
 import './App.css'
 import Dati from './Dati.json';
-// import Header from './Header.jsx';
-import Checkbox from '@mui/material/Checkbox';
+
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-// import Card from './Card.jsx';
 
 import MovieList from './MovieList.jsx';
 import FilterCheckbox from './FilterCheckbox.jsx';
@@ -16,13 +14,11 @@ import FilterCheckbox from './FilterCheckbox.jsx';
 
 function App() {
   const[movies, setMovies] = useState();
-  const[filteredMovies, setFilteredMovies] = useState([]);
-  const[checkCounter, setCheckCounter] = useState(0);
-
-
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedCult, setSelectedCult] = useState([]);
+  const [selectedSuccess, setSelectedSuccess] = useState([]);
 
+  //FILTRA CATEGORY
   function handleCategoryChange(category){
     if (selectedCategories.includes(category)) {
       setSelectedCategories(selectedCategories.filter((cat) => cat !== category));
@@ -31,11 +27,21 @@ function App() {
     }
   };
 
+  //FILTRA CULT
   function handleCultChange(cult){
     if (selectedCult.includes(cult)) {
-      setSelectedCategories(selectedCult.filter((cat) => cat !== cult));
+      setSelectedCult(selectedCult.filter((cat) => cat !== cult));
     } else {
-      setSelectedCategories([...selectedCult, cult]);
+      setSelectedCult([...selectedCult, cult]);
+    }
+  };
+
+  //FILTRA SUCCESS
+  function handleSuccessChange(success){
+    if (selectedSuccess.includes(success)) {
+      setSelectedSuccess(selectedSuccess.filter((cat) => cat !== success));
+    } else {
+      setSelectedSuccess([...selectedSuccess, success]);
     }
   };
 
@@ -49,46 +55,6 @@ function App() {
     );
     setFilteredMovies(resultMovies);
   };
-
-
-
-  //SUCCESS - FUNZIONE CHE FILTRA DATI
-  function isSuccess(event){
-    const {value, checked} = event.target;
-    const isSuccessValue = value === "true";
-
-    if (checked) {
-      const resultSuccess = movies.filter((item) => 
-        item.success === isSuccessValue
-      );
-      setFilteredMovies(resultSuccess);
-    } else {
-      setFilteredMovies(movies);
-    }
-  };
-
-
-  //CULT - FUNZIONE CHE FILTRA DATI
-  function isCult(event){
-    const {value, checked} = event.target;
-    const isCultValue = value === "true";
-
-    if (checked) {
-      const resultCult = movies.filter((item) => 
-        item.cult === isCultValue
-      );
-      setFilteredMovies(resultCult);
-    } else {
-      setFilteredMovies(movies);
-    }
-  };
-
-
-
-
-  const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
-
-
 
 
 
@@ -165,28 +131,19 @@ function App() {
           <AccordionDetails>
 
             <div className='check-container-mini'>
-              {/* <div> */}
-                {/* <h3>Yes</h3> */}
-                {/* <Checkbox {...label} onChange={(event) => isCult(event)} value="true" /> */}
 
                 <FilterCheckbox
                   label="yes"
-                  checked={selectedCult.includes(true)}
-                  onChange={() => handleCultChange(true)}
+                  checked={selectedCult.includes("yes")}
+                  onChange={() => handleCultChange("yes")}
                 />
-
-              {/* </div> */}
 
               <FilterCheckbox
                   label="no"
-                  checked={selectedCult.includes(false)}
-                  onChange={() => handleCultChange(false)}
+                  checked={selectedCult.includes("no")}
+                  onChange={() => handleCultChange("no")}
                 />
 
-              {/* <div>
-                <h3>No</h3>
-                <Checkbox {...label} onChange={(event) => isCult(event)} value="false" />
-              </div> */}
             </div>
 
           </AccordionDetails>
@@ -203,15 +160,23 @@ function App() {
           <AccordionDetails>
 
             <div className='check-container-mini'>
-              <div>
-                <h3>Yes</h3>
-                <Checkbox {...label} onChange={(event) => isSuccess(event)} value="true" />
-              </div>
 
-              <div>
-                <h3>No</h3>
-                <Checkbox {...label} onChange={(event) => isSuccess(event)} value="false" />
-              </div>
+
+              <FilterCheckbox
+                label="yes"
+                checked={selectedSuccess.includes("yes")}
+                onChange={() => handleSuccessChange("yes")}
+              />
+
+              {/* </div> */}
+
+              <FilterCheckbox
+                  label="no"
+                  checked={selectedSuccess.includes("no")}
+                  onChange={() => handleSuccessChange("no")}
+              />
+
+
             </div>
 
           </AccordionDetails>
@@ -219,8 +184,7 @@ function App() {
       </div>
 
         <div className='card-container'>
-          {/* {showMovies} */}
-          <MovieList data={Dati} selectedCategories={selectedCategories} selectedCult={selectedCult} />
+          <MovieList data={Dati} selectedCategories={selectedCategories} selectedCult={selectedCult} selectedSuccess={selectedSuccess} />
         </div>
       </div>
     </>

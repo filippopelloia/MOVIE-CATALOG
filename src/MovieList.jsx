@@ -6,7 +6,6 @@ function MovieList(props) {
     props.selectedCategories.every((category) => movie.categories.includes(category)) &&
     props.selectedCult.every((cultMovie) => movie.cult.includes(cultMovie)) &&
     props.selectedSuccess.every((successMovie) => movie.success.includes(successMovie))
-    // && (typeof movie.cult === "boolean" ? movie.cult : movie.cult.includes(props.selectedCult[0]))
   );
 
   return (
